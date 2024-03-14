@@ -10,8 +10,6 @@ from yolink_devices import YoLinkDevice
 from yolink_mqtt_client import YoLinkMQTTClient
 log = getLogger(__name__)
 
-ASSISTANT_RELAY_URL = 'http://192.168.1.199:3000/assistant'
-
 def main(argv):
 
     usage = ("{FILE} "
@@ -60,12 +58,9 @@ def main(argv):
 
     log.debug(device_hash)
 
-    # Use the user name for Assistant Relay
-    google_home_client = AssistantRelayClient(url=ASSISTANT_RELAY_URL)
 
     yolink_client = YoLinkMQTTClient(args.csid, args.csseckey,
-            args.topic, args.mqtt_url, args.mqtt_port, device_hash,
-            google_home_client)
+            args.topic, args.mqtt_url, args.mqtt_port, device_hash)
     yolink_client.connect_to_broker()
 
 if __name__ == '__main__':

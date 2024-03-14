@@ -13,16 +13,15 @@ Object representation for YoLink MQTT Client
 class YoLinkMQTTClient(object):
 
     def __init__(self, csid, csseckey, topic, mqtt_url, mqtt_port, device_hash,
-                 google_home_client, client_id=os.getpid()): 
+                 client_id=os.getpid()): 
         self.csid = csid
         self.csseckey = csseckey
         self.topic = topic
         self.mqtt_url = mqtt_url
         self.mqtt_port = int(mqtt_port)
         self.device_hash = device_hash
-        self.google_home_client = google_home_client
 
-        self.client = mqtt.Client(client_id=str(__name__ + str(client_id)),
+        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id=str(__name__ + str(client_id)),
                 clean_session=True, userdata=None,
                 protocol=mqtt.MQTTv311, transport="tcp")
         self.client.on_connect = self.on_connect
@@ -46,23 +45,12 @@ class YoLinkMQTTClient(object):
         """
         Callback for broker published events
         """
-        log.debug(msg.topic, msg.payload)
+        #log.info(msg.topic, msg.payload)
 
         try:
             payload = json.loads(msg.payload.decode("utf-8"))
-            log.debug(payload)
+            log.info(payload)
 
-            event = payload['event']
-            deviceId = payload['deviceId']
-            state = payload['data']['state']
-            device = self.device_hash[deviceId]
-
-            log.info("Event:{0} Device:{1} State:{2}".format(event,
-                device.get_name(), state))
-
-            if ('open' in state and not device.get_ignore()):
-                self.google_home_client.send_message_to_device(device_name="Kitchen display",
-                    message=device.get_google_home_message())
         except:
             error = sys.exc_info()[0]
             log.info("Error reading payload: %s" % error)

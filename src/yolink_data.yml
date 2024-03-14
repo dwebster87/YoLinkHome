@@ -3,25 +3,15 @@
 # Set the ignore param if you do not want to broadcast messages.
 #
 device_parameters:
-  - name: 'Front Door'
-    type: 'door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456
-  - name: 'Main Garage Door'
-    type: 'door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456
-  - name: 'Side Garage Door'
-    type: 'door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456
-  - name: 'Mail Box'
-    type: 'mailbox_sensor' 
-    serial_number: DEADBEEF1234567890DEADBEEF123456
-  - name: 'Garage Door'
-    type: 'garage_door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456
-  - name: 'Family Room Door'
-    type: 'door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456 
-    ignore: True
-  - name: 'Test Sensor'
-    type: 'garage_door_sensor'
-    serial_number: DEADBEEF1234567890DEADBEEF123456
+  - name: 'temp_humidity_sensor'
+    type: 'temp_humidity'
+    serial_number: 2EF42F33AE0B42AFAC32D08FF83FF0FC
+  - name: 'vibration_sensor'
+    type: 'vibration'
+    serial_number: 66583572291348678C825EB67C4583B4
+  - name: 'vibration_sensor_2'
+    type: 'vibration'
+    serial_number: 881BE2E100DD45C8918092BA1684ACE3
+  - name: 'vibration_sensor_3'
+    type: 'vibration'
+    serial_number: BD7F1D4239A04A8FA57A43542BAD78AF
